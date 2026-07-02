@@ -3,6 +3,7 @@ import { Navbar } from '../components/Navbar.jsx'
 import { useMisAulas } from '../hooks/useMisAulas.js'
 import { PanelAlumnos } from '../components/PanelAlumnos.jsx'
 import { PanelAsistencia } from '../components/PanelAsistencia.jsx'
+import { useAlumnos } from '../hooks/useAlumnos.js'
 
 /* ============================================================================
    MisAulasScreen: pantalla principal del DOCENTE.
@@ -14,10 +15,14 @@ import { PanelAsistencia } from '../components/PanelAsistencia.jsx'
    El estado "aulaSeleccionada" (presentacion) decide que aula se esta viendo.
    ============================================================================ */
 export const MisAulasScreen = () => {
-    const { aulas, cargando, error } = useMisAulas()
+    const { aulas, cargandoAulas, errorAulas } = useMisAulas()
+
+    const [aulaSeleccionada, setAulaSeleccionada] = useState(null)
+
+    const { alumnos, cargando, error, agregarAlumno, quitarAlumno } = useAlumnos(aulaSeleccionada?._id)
+
 
     /* Guardamos el aula elegida (el objeto completo). null = ninguna elegida. */
-    const [aulaSeleccionada, setAulaSeleccionada] = useState(null)
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -26,10 +31,10 @@ export const MisAulasScreen = () => {
             <div className="max-w-3xl mx-auto px-6 py-10">
                 <h2 className="text-2xl font-bold text-gray-800 mb-6">Mis aulas</h2>
 
-                {cargando ? (
+                {cargandoAulas ? (
                     <p className="text-gray-500">Cargando...</p>
-                ) : error ? (
-                    <p className="text-red-600 bg-red-50 rounded-lg px-3 py-2">{error}</p>
+                ) : errorAulas ? (
+                    <p className="text-red-600 bg-red-50 rounded-lg px-3 py-2">{errorAulas}</p>
                 ) : aulas.length === 0 ? (
                     <p className="text-gray-500">Todavía no tenés aulas asignadas.</p>
                 ) : (
@@ -55,8 +60,8 @@ export const MisAulasScreen = () => {
                 {/* Si hay un aula elegida, mostramos los dos paneles */}
                 {aulaSeleccionada && (
                     <div className="flex flex-col gap-8">
-                        <PanelAlumnos aula={aulaSeleccionada} />
-                        <PanelAsistencia aula={aulaSeleccionada} />
+                        <PanelAlumnos aula={aulaSeleccionada} alumnos={alumnos} cargando={cargando} error={error} agregarAlumno={agregarAlumno} quitarAlumno={quitarAlumno} />
+                        <PanelAsistencia aula={aulaSeleccionada} alumnos={alumnos} />
                     </div>
                 )}
             </div>

@@ -6,16 +6,15 @@ import { useAlumnos } from '../hooks/useAlumnos.js'
    Recibe el aula por props y usa el hook useAlumnos con su id.
    Tiene un mini-formulario para agregar y un boton para quitar cada alumno.
    ============================================================================ */
-export const PanelAlumnos = ({ aula }) => {
+export const PanelAlumnos = ({ aula, alumnos, cargando, error, agregarAlumno, quitarAlumno }) => {
 
     /* Le pasamos el id del aula al hook; el resto (cargar, agregar, quitar) ya
        lo resuelve el hook por dentro. */
-    const { alumnos, cargando, error, agregarAlumno, quitarAlumno } = useAlumnos(aula._id)
 
     /* Estado del mini-formulario (presentacion) */
     const [nombre, setNombre] = useState('')
     const [apellido, setApellido] = useState('')
-    const [dni, setDni] = useState('')
+    const [dni, setDni] = useState(null)
 
     const manejarSubmit = async (evento) => {
         evento.preventDefault()

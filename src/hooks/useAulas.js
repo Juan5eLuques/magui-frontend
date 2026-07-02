@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { obtenerAulas, crearAula, actualizarAula, eliminarAula } from '../services/aulaService.js'
-import { obtenerDocentes } from '../services/usuarioService.js'
+import { obtenerDocentesDisponibles } from '../services/usuarioService.js'
 import { useAuth } from './useAuth.js'
 
 /* ============================================================================
@@ -50,7 +50,7 @@ export function useAulas() {
     /* Traer la lista de docentes (para el <select> del formulario) */
     const cargarDocentes = async () => {
         try {
-            const respuesta = await obtenerDocentes(token)
+            const respuesta = await obtenerDocentesDisponibles(token)
             if (respuesta.ok) {
                 setDocentes(respuesta.data.docentes)
             }

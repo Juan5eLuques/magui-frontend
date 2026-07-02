@@ -16,7 +16,7 @@ import { useAsistencia } from '../hooks/useAsistencia.js'
    La fecha por defecto es hoy (en formato YYYY-MM-DD, que es lo que espera
    el input type="date" y el backend).
    ============================================================================ */
-export const PanelAsistencia = ({ aula }) => {
+export const PanelAsistencia = ({ aula , alumnos}) => {
 
     /* fechaHoy: arma la fecha de hoy como "2026-06-29".
        toISOString() da algo como "2026-06-29T12:00:00.000Z"; con split('T')[0]
@@ -25,7 +25,6 @@ export const PanelAsistencia = ({ aula }) => {
     const [fecha, setFecha] = useState(fechaHoy)
 
     /* Alumnos del aula y asistencia de la fecha elegida */
-    const { alumnos } = useAlumnos(aula._id)
     const { asistencias, marcarAsistencia, corregirAsistencia } = useAsistencia(aula._id, fecha)
 
     /* Dado un alumno, busca su registro de asistencia del dia (o undefined) */

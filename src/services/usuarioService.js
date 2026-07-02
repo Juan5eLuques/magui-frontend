@@ -15,3 +15,12 @@ export async function obtenerDocentes(token) {
     })
     return await respuesta.json()
 }
+
+export async function obtenerDocentesDisponibles(token) {
+     const respuesta = await fetch(`${API_URL}/usuario/docentes-disponibles`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    return await respuesta.json()
+}

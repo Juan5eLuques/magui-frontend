@@ -12,11 +12,10 @@ import { AuthProvider } from './context/AuthContext.jsx'
    - <AuthProvider>: comparte el estado de autenticacion (token, usuario)
      con TODA la app, para que cualquier pantalla sepa si hay alguien logueado. */
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
     <BrowserRouter>
       <AuthProvider>
         <App />
       </AuthProvider>
     </BrowserRouter>
-  </StrictMode>,
+
 )

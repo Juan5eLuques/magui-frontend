@@ -75,5 +75,5 @@ export function useAlumnos(aulaId) {
         }
     }
 
-    return { alumnos, cargando, error, agregarAlumno, quitarAlumno }
+    return { alumnos, cargando, error, agregarAlumno, quitarAlumno, setAlumnos }
 }

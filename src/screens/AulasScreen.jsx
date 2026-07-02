@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Navbar } from '../components/Navbar.jsx'
 import { useAulas } from '../hooks/useAulas.js'
+import { Skeleton } from '@mui/material'
 
 /* ============================================================================
    AulasScreen: pantalla de gestion de aulas (CRUD). Solo la usa el director.
@@ -141,7 +142,11 @@ export const AulasScreen = () => {
 
                 {/* ---------------- LISTA de aulas ---------------- */}
                 {cargando ? (
-                    <p className="text-gray-500">Cargando aulas...</p>
+                    <div className='gap-2 grid'>
+                    <Skeleton className='gap-2' variant='rounded' width={700} height={90} animation='wave'   />
+                    <Skeleton className='gap-2' variant='rounded' width={700} height={90} animation='wave' color='red'  />
+                    <Skeleton className='gap-2' variant='rounded' width={700} height={90} animation='wave'   />
+                    </div>
                 ) : aulas.length === 0 ? (
                     <p className="text-gray-500">Todavía no hay aulas. Creá la primera arriba.</p>
                 ) : (
